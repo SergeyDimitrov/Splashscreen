@@ -7,15 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 
 
 public class SplashScreenActivity extends AppCompatActivity {
-    private boolean isRunning = false;
+    private static final int SPLASH_DURATION_MS = 2000;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_activity);
-        if (savedInstanceState != null) {
-            isRunning = true;
-        }
-        if (isRunning == false) {
+        if (savedInstanceState == null) {
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -24,11 +21,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(intent);
                 }
-            }, 2000);
+            }, SPLASH_DURATION_MS);
         }
-
-    }
-    public void onSaveInstanseState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
     }
 }
